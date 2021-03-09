@@ -10,7 +10,8 @@ lazy val cross_platform_template = crossProject(JSPlatform, JVMPlatform, NativeP
         "-Xasync"
       ),
     organization := "xyz.hyperreal",
-    mainClass := Some("xyz.hyperreal.cross_platform_template.Main"),
+    mainClass := Some("xyz.hyperreal.name.Main"),
+    Test / mainClass := Some("xyz.hyperreal.name.Main"),  // comment out for unit testing
     libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.5" % "test",
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -24,9 +25,9 @@ lazy val cross_platform_template = crossProject(JSPlatform, JVMPlatform, NativeP
   ).
   jsSettings(
     jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(),
-//    Test / scalaJSUseMainModuleInitializer := true,
-//    Test / scalaJSUseTestModuleInitializer := false,
-    Test / scalaJSUseMainModuleInitializer := false,
-    Test / scalaJSUseTestModuleInitializer := true,
+    Test / scalaJSUseMainModuleInitializer := true,
+    Test / scalaJSUseTestModuleInitializer := false,
+//    Test / scalaJSUseMainModuleInitializer := false,
+//    Test / scalaJSUseTestModuleInitializer := true,
     scalaJSUseMainModuleInitializer := true,
   )
