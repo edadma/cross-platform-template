@@ -1,8 +1,11 @@
 lazy val cross_platform_template = crossProject(JSPlatform, JVMPlatform, NativePlatform).in(file(".")).
+ThisBuild / versionScheme := Some("semver-spec")
+
+lazy val projectName = crossProject(JSPlatform, JVMPlatform, NativePlatform).in(file(".")).
   settings(
-    name := "cross-platform-template",
-    version := "0.1.0-snapshot.1",
-    scalaVersion := "2.13.5",
+    name := "projectName",
+    version := "0.1.0",
+    scalaVersion := "2.13.6",
     scalacOptions ++=
       Seq(
         "-deprecation", "-feature", "-unchecked",
@@ -10,11 +13,14 @@ lazy val cross_platform_template = crossProject(JSPlatform, JVMPlatform, NativeP
         "-Xasync"
       ),
     organization := "xyz.hyperreal",
-    mainClass := Some("xyz.hyperreal.name.Main"),
-    Test / mainClass := Some("xyz.hyperreal.name.Main"),  // comment out for unit testing
+    githubOwner := "edadma",
+    githubRepository := "projectName",
+    resolvers += Resolver.githubPackages("edadma", "cross-platform"),
+    mainClass := Some("xyz.hyperreal.projectName.Main"),
     libraryDependencies += "org.scalatest" %%% "scalatest" % "3.2.5" % "test",
+    libraryDependencies += "xyz.hyperreal" %%% "cross-platform" % "0.1.0",
     publishMavenStyle := true,
-    publishArtifact in Test := false,
+    Test / publishArtifact := false,
     licenses += "ISC" -> url("https://opensource.org/licenses/ISC")
   ).
   jvmSettings(
@@ -25,9 +31,10 @@ lazy val cross_platform_template = crossProject(JSPlatform, JVMPlatform, NativeP
   ).
   jsSettings(
     jsEnv := new org.scalajs.jsenv.nodejs.NodeJSEnv(),
-    Test / scalaJSUseMainModuleInitializer := true,
-    Test / scalaJSUseTestModuleInitializer := false,
-//    Test / scalaJSUseMainModuleInitializer := false,
-//    Test / scalaJSUseTestModuleInitializer := true,
+//    Test / scalaJSUseMainModuleInitializer := true,
+//    Test / scalaJSUseTestModuleInitializer := false,
+    Test / scalaJSUseMainModuleInitializer := false,
+    Test / scalaJSUseTestModuleInitializer := true,
     scalaJSUseMainModuleInitializer := true,
   )
+
